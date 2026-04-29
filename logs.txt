@@ -1,0 +1,4 @@
+2026-04-28 22:59:49 [main] INFO  [TestNG] Running:
+  G:\IDEA Projects\restassured-framework\testng.xml
+
+2026-04-28 22:59:50 [main] INFO  RequestSpecification initialized successfully
