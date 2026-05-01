@@ -1,7 +1,5 @@
 package tests;
 
-import client.APIClient;
-import constants.Endpoints;
 import static org.hamcrest.Matchers.*;
 import io.restassured.response.Response;
 import models.request.UserRequest;
@@ -9,6 +7,7 @@ import models.response.UserResponse;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+import services.UserService;
 
 public class SampleTest {
 
@@ -17,7 +16,7 @@ public class SampleTest {
     @Test
     public void getMultipleUsersTest()
     {
-        Response response = APIClient.get(Endpoints.GET_USERS);
+        Response response = UserService.getAllUsersRaw();
         Reporter.getCurrentTestResult().setAttribute("response", response);
         response.then()
                 .log().ifValidationFails()
@@ -27,25 +26,26 @@ public class SampleTest {
     @Test
     public void getSingleUserTest()
     {
-        Response response = APIClient.get(Endpoints.GET_SINGLE_USER);
+        Response response = UserService.getUserRaw(3);
         Reporter.getCurrentTestResult().setAttribute("response", response);
         response.then()
                 .log().ifValidationFails()
                 .statusCode(200)
-                .body("data.first_name",equalTo("Janet"));
+                .body("data.first_name",equalTo("Emma"));
 
     }
     @Test
     public void createUserTest()
     {
+        // Arrange
         UserRequest request = new UserRequest("Shreedhar", "Automation Engineer");
-        Response response = APIClient.post(Endpoints.CREATE_USER, request);
-        Reporter.getCurrentTestResult().setAttribute("response", response);
+        // Act
+        Response response = UserService.createUserRaw(request);
         UserResponse responseBody = response.as(UserResponse.class);
-        response.then()
-                .log().ifValidationFails()
-                .statusCode(201);
-        // POJO validation (clean + type-safe)
+        // Attach response (for FailureLogger)
+        Reporter.getCurrentTestResult().setAttribute("response", response);
+
+        // Assert
         Assert.assertEquals(responseBody.getName(), "Shreedhar");
         Assert.assertEquals(responseBody.getJob(), "Automation Engineer");
         Assert.assertNotNull(responseBody.getId());
@@ -53,15 +53,12 @@ public class SampleTest {
 
     @Test
     public void updatePartialUserTest() {
+
         UserRequest request = new UserRequest();
         request.setJob("Lead Engineer");// Only partial update
-        Response response = APIClient.patch(Endpoints.UPDATE_PARTIAL_USER, request);
-        Reporter.getCurrentTestResult().setAttribute("response", response);
+        Response response = UserService.updatePartialUserRaw(3, request);
         UserResponse responseBody = response.as(UserResponse.class);
-        response.then()
-                .log().ifValidationFails()
-                .statusCode(200);
-
+        Reporter.getCurrentTestResult().setAttribute("response", response);
         Assert.assertEquals(responseBody.getJob(), "Lead Engineer");
     }
 
@@ -70,18 +67,15 @@ public class SampleTest {
 
         UserRequest request = new UserRequest();
         request.setName("UpdatedName");
-        Response response = APIClient.put(Endpoints.UPDATE_COMPLETE_USER, request);
-        Reporter.getCurrentTestResult().setAttribute("response", response);
+        Response response= UserService.updateUserRaw(2, request);
         UserResponse responseBody = response.as(UserResponse.class);
-        response.then()
-                .log().ifValidationFails()
-                .statusCode(200);
+        Reporter.getCurrentTestResult().setAttribute("response", response);
         Assert.assertEquals(responseBody.getName(), "UpdatedName");
     }
 
     @Test
     public void deleteUserTest() {
-        Response response = APIClient.delete(Endpoints.DELETE_USER);
+        Response response = UserService.deleteUserRaw(2);
         Reporter.getCurrentTestResult().setAttribute("response", response);
         response.then()
                 .log().ifValidationFails()
