@@ -6,20 +6,18 @@ import static org.hamcrest.Matchers.*;
 import io.restassured.response.Response;
 import models.request.UserRequest;
 import models.response.UserResponse;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 public class SampleTest {
 
-    Logger log = LogManager.getLogger(SampleTest.class);
+
 
     @Test
     public void getMultipleUsersTest()
     {
-        Response response = APIClient.sendRequest("GET", Endpoints.GET_USERS, null);
+        Response response = APIClient.get(Endpoints.GET_USERS);
         Reporter.getCurrentTestResult().setAttribute("response", response);
         response.then()
                 .log().ifValidationFails()
@@ -29,7 +27,7 @@ public class SampleTest {
     @Test
     public void getSingleUserTest()
     {
-        Response response = APIClient.sendRequest("GET", Endpoints.GET_SINGLE_USER, null);
+        Response response = APIClient.get(Endpoints.GET_SINGLE_USER);
         Reporter.getCurrentTestResult().setAttribute("response", response);
         response.then()
                 .log().ifValidationFails()
@@ -41,7 +39,7 @@ public class SampleTest {
     public void createUserTest()
     {
         UserRequest request = new UserRequest("Shreedhar", "Automation Engineer");
-        Response response = APIClient.sendRequest("POST", Endpoints.CREATE_USER, request);
+        Response response = APIClient.post(Endpoints.CREATE_USER, request);
         Reporter.getCurrentTestResult().setAttribute("response", response);
         UserResponse responseBody = response.as(UserResponse.class);
         response.then()
@@ -57,7 +55,7 @@ public class SampleTest {
     public void updatePartialUserTest() {
         UserRequest request = new UserRequest();
         request.setJob("Lead Engineer");// Only partial update
-        Response response = APIClient.sendRequest("PATCH", Endpoints.UPDATE_PARTIAL_USER, request);
+        Response response = APIClient.patch(Endpoints.UPDATE_PARTIAL_USER, request);
         Reporter.getCurrentTestResult().setAttribute("response", response);
         UserResponse responseBody = response.as(UserResponse.class);
         response.then()
@@ -72,7 +70,7 @@ public class SampleTest {
 
         UserRequest request = new UserRequest();
         request.setName("UpdatedName");
-        Response response = APIClient.sendRequest("PUT", Endpoints.UPDATE_COMPLETE_USER, request);
+        Response response = APIClient.put(Endpoints.UPDATE_COMPLETE_USER, request);
         Reporter.getCurrentTestResult().setAttribute("response", response);
         UserResponse responseBody = response.as(UserResponse.class);
         response.then()
@@ -83,7 +81,7 @@ public class SampleTest {
 
     @Test
     public void deleteUserTest() {
-        Response response = APIClient.sendRequest("DELETE", Endpoints.DELETE_USER, null);
+        Response response = APIClient.delete(Endpoints.DELETE_USER);
         Reporter.getCurrentTestResult().setAttribute("response", response);
         response.then()
                 .log().ifValidationFails()

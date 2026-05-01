@@ -11,41 +11,40 @@ import static io.restassured.RestAssured.given;
 
 public class APIClient {
 
-    public static Response sendRequest(String method, String endpoint, Object body) throws IllegalArgumentException,NullPointerException
-    {
+    public static Response get(String endpoint) {
+        return given()
+                .spec(BaseRequest.getRequestSpec())
+                .when()
+                .get(endpoint);
+    }
 
-        RequestSpecification request = given().spec(BaseRequest.getRequestSpec());
-        switch (method.toUpperCase()) {
-            case "GET":
-                return request
-                        .when().get(endpoint)
-                        .then().extract().response();
+    public static Response post(String endpoint, Object body) {
+        return given()
+                .spec(BaseRequest.getRequestSpec())
+                .body(body)
+                .when()
+                .post(endpoint);
+    }
 
-            case "POST":
-                return request
-                        .body(body)
-                        .when().post(endpoint)
-                        .then().extract().response();
+    public static Response put(String endpoint, Object body) {
+        return given()
+                .spec(BaseRequest.getRequestSpec())
+                .body(body)
+                .when()
+                .put(endpoint);
+    }
+    public static Response patch(String endpoint, Object body) {
+        return given()
+                .spec(BaseRequest.getRequestSpec())
+                .body(body)
+                .when()
+                .patch(endpoint);
+    }
 
-            case "PUT":
-                return request
-                        .body(body)
-                        .when().put(endpoint)
-                        .then().extract().response();
-
-            case "PATCH":
-                return request
-                        .body(body)
-                        .when().patch(endpoint)
-                        .then().extract().response();
-
-            case "DELETE":
-                return request
-                        .when().delete(endpoint)
-                        .then().extract().response();
-
-            default:
-                throw new IllegalArgumentException("Invalid HTTP method");
-        }
+    public static Response delete(String endpoint) {
+        return given()
+                .spec(BaseRequest.getRequestSpec())
+                .when()
+                .delete(endpoint);
     }
 }
