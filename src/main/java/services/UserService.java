@@ -14,7 +14,7 @@ public class UserService {
 
     // 🔹 CREATE
     public static Response createUserRaw(UserRequest request) {
-        return APIClient.post(Endpoints.CREATE_USER, request);
+        return APIClient.post(Endpoints.createUser(), request);
     }
 
     public static UserResponse createUser(UserRequest request) {
@@ -23,7 +23,7 @@ public class UserService {
 
     // 🔹 GET ALL USERS
     public static Response getAllUsersRaw() {
-        return APIClient.get(Endpoints.GET_USERS);
+        return APIClient.get(Endpoints.getUsers());
     }
 
     public static List<UserResponse> getAllUsers() {
@@ -34,7 +34,7 @@ public class UserService {
 
     // 🔹 GET SINGLE USER
     public static Response getUserRaw(int id) {
-        return APIClient.get(Endpoints.BASE_USER_URL + "/" + id);
+        return APIClient.get(Endpoints.getUserById(id));
     }
 
     public static UserResponse getUser(int id) {
@@ -45,7 +45,7 @@ public class UserService {
 
     // 🔹 UPDATE (PUT)
     public static Response updateUserRaw(int id, UserRequest request) {
-        return APIClient.put(Endpoints.BASE_USER_URL + "/" + id, request);
+        return APIClient.put(Endpoints.updateUser(id) , request);
     }
 
     public static UserResponse updateUser(int id, UserRequest request) {
@@ -54,7 +54,7 @@ public class UserService {
 
     // 🔹 UPDATE PARTIAL (PATCH)
     public static Response updatePartialUserRaw(int id, UserRequest request) {
-        return APIClient.patch(Endpoints.BASE_USER_URL + "/" + id, request);
+        return APIClient.patch(Endpoints.updatePartialUser(id), request);
     }
 
     public static UserResponse updatePartialUser(int id, UserRequest request) {
@@ -63,7 +63,7 @@ public class UserService {
 
     // 🔹 DELETE
     public static Response deleteUserRaw(int id) {
-        return APIClient.delete(Endpoints.BASE_USER_URL + "/" + id);
+        return APIClient.delete(Endpoints.deleteUser(id));
     }
 
     public static boolean deleteUser(int id) {
