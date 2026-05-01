@@ -2,44 +2,41 @@ package base;
 
 import config.ConfigReader;
 import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.config.HttpClientConfig;
+import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import utils.CustomLoggingFilter;
 
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.File;
 
 public class BaseRequest {
     private static final Logger log = LogManager.getLogger(BaseRequest.class);
     private static RequestSpecification requestSpec;
 
     private static void initRequestSpec() {
+        int timeout = Integer.parseInt(
+                ConfigReader.get("timeout") != null ? ConfigReader.get("timeout") : "5000"
+        );
         try
         {
-            PrintStream logStream = new PrintStream(new OutputStream() {
-                private StringBuilder buffer = new StringBuilder();
-
-                @Override
-                public void write(int b) {
-                    if (b == '\n') {
-                        log.info(buffer.toString());
-                        buffer.setLength(0);
-                    } else {
-                        buffer.append((char) b);
-                    }
-                }
-            }, true);
-
-            System.out.println("api.key"+ConfigReader.get("api.key"));
+            System.out.println("Log4j config loaded from: " +
+                    Thread.currentThread().getContextClassLoader()
+                            .getResource("log4j2.xml"));
+            RestAssuredConfig config = RestAssuredConfig.config()
+                    .httpClient(HttpClientConfig.httpClientConfig()
+                            .setParam("http.connection.timeout", timeout)
+                            .setParam("http.socket.timeout", timeout)
+                            .setParam("http.connection-manager.timeout", timeout)
+                    );
             requestSpec = new RequestSpecBuilder()
                     .setBaseUri(ConfigReader.get("base.url"))
                     .setContentType(ContentType.JSON)
                     .addHeader("x-api-key", ConfigReader.get("api.key"))
-                    //.addFilter(new RequestLoggingFilter(logStream))
-                    //.addFilter(new ResponseLoggingFilter(logStream))
+                    .setConfig(config)
+                    .addFilter(new CustomLoggingFilter())
                     .build();
 
             log.info("RequestSpecification initialized successfully");

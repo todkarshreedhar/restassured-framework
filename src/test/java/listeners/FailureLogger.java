@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import utils.LogUtils;
 
 public class FailureLogger implements ITestListener {
     private static final Logger log = LogManager.getLogger(FailureLogger.class);
@@ -21,7 +22,13 @@ public class FailureLogger implements ITestListener {
 
             log.error("Status Code: {}", response.getStatusCode());
             log.error("Response Body:\n{}", response.getBody().asPrettyString());
-            log.error("Headers: {}", response.getHeaders());
+            response.getHeaders().forEach(header -> {
+                if (LogUtils.isSensitive(header.getName())) {
+                    log.error("{}: {}", header.getName(), LogUtils.mask(header.getValue()));
+                } else {
+                    log.error("{}: {}", header.getName(), header.getValue());
+                }
+            });
 
         } else {
             log.error("No response captured");
