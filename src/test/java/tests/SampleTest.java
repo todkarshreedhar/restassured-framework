@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 import services.UserService;
+import utils.AssertUtils;
 
 public class SampleTest {
 
@@ -46,9 +47,9 @@ public class SampleTest {
         Reporter.getCurrentTestResult().setAttribute("response", response);
 
         // Assert
-        Assert.assertEquals(responseBody.getName(), "Shreedhar");
-        Assert.assertEquals(responseBody.getJob(), "Automation Engineer");
-        Assert.assertNotNull(responseBody.getId());
+        AssertUtils.assertEquals(responseBody.getName(), "Shreedhar", "Name mismatch");
+        AssertUtils.assertEquals(responseBody.getJob(), "Automation Engineer", "Job value mismatch");
+        AssertUtils.assertNotNull(responseBody.getId(), "ID should not be null");
     }
 
     @Test
@@ -59,7 +60,7 @@ public class SampleTest {
         Response response = UserService.updatePartialUserRaw(3, request);
         UserResponse responseBody = response.as(UserResponse.class);
         Reporter.getCurrentTestResult().setAttribute("response", response);
-        Assert.assertEquals(responseBody.getJob(), "Lead Engineer");
+        AssertUtils.assertEquals(responseBody.getJob(), "Lead Engineer", "Job value mismatch");
     }
 
     @Test
@@ -70,7 +71,7 @@ public class SampleTest {
         Response response= UserService.updateUserRaw(2, request);
         UserResponse responseBody = response.as(UserResponse.class);
         Reporter.getCurrentTestResult().setAttribute("response", response);
-        Assert.assertEquals(responseBody.getName(), "UpdatedName");
+        AssertUtils.assertEquals(responseBody.getName(), "UpdatedName", "Name mismatch");
     }
 
     @Test
