@@ -1,6 +1,8 @@
 package tests;
 
 import static org.hamcrest.Matchers.*;
+
+import builders.RequestBuilder;
 import io.restassured.response.Response;
 import models.request.UserRequest;
 import models.response.UserResponse;
@@ -8,6 +10,7 @@ import org.testng.Reporter;
 import org.testng.annotations.Test;
 import services.UserService;
 import utils.AssertUtils;
+import utils.SchemaValidator;
 import utils.TestDataLoader;
 import utils.UserFactory;
 
@@ -36,6 +39,42 @@ public class SampleTest {
                 .body("data.first_name",equalTo("Emma"));
 
     }
+
+    @Test
+    public void createUserWithBuilderTest() {
+
+        UserRequest request = RequestBuilder.user()
+                .name("BuilderUser")
+                .job("Automation Engineer")
+                .build();
+
+        Response response =
+                UserService.createUserRaw(request);
+
+        Reporter.getCurrentTestResult()
+                .setAttribute("response", response);
+
+        UserResponse responseBody =
+                response.as(UserResponse.class);
+
+        AssertUtils.assertStatusCode(
+                response.getStatusCode(),
+                201
+        );
+
+        AssertUtils.assertEquals(
+                responseBody.getName(),
+                request.getName(),
+                "Name mismatch"
+        );
+
+        AssertUtils.assertEquals(
+                responseBody.getJob(),
+                request.getJob(),
+                "Job mismatch"
+        );
+    }
+
     @Test
     public void createUserTest() {
 
@@ -74,6 +113,12 @@ public class SampleTest {
         AssertUtils.assertNotNull(
                 responseBody.getId(),
                 "ID should not be null"
+        );
+
+        // 🔹 Schema validation
+        SchemaValidator.validate(
+                response,
+                "schemas/createUserSchema.json"
         );
     }
 

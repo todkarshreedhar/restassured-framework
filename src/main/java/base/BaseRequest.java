@@ -13,11 +13,12 @@ import utils.CustomLoggingFilter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BaseRequest {
     private static final Logger log = LogManager.getLogger(BaseRequest.class);
     private static final Map<ServiceType, RequestSpecification> requestSpecs
-            = new HashMap<>();
+            = new ConcurrentHashMap<>();
     private BaseRequest() {
         // Prevent object creation
     }

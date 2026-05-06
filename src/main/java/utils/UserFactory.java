@@ -23,6 +23,7 @@ public class UserFactory {
 
         request.setName("User_" + uniqueId);
         request.setJob("AutomationEngineer_" + uniqueId);
+
         log.info("Generated random user: {}", request.getName());
 
         return request;
