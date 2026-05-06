@@ -1,6 +1,7 @@
 package base;
 
-import config.ConfigReader;
+import config.ConfigManager;
+import constants.ServiceType;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
@@ -10,34 +11,34 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.CustomLoggingFilter;
 
-import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseRequest {
     private static final Logger log = LogManager.getLogger(BaseRequest.class);
-    private static RequestSpecification requestSpec;
-
-    private static void initRequestSpec() {
-        int timeout = Integer.parseInt(
-                ConfigReader.get("timeout") != null ? ConfigReader.get("timeout") : "5000"
-        );
+    private static final Map<ServiceType, RequestSpecification> requestSpecs
+            = new HashMap<>();
+    private BaseRequest() {
+        // Prevent object creation
+    }
+    private static void initRequestSpec(ServiceType serviceType) {
+        int timeout = ConfigManager.getTimeout();
         try
         {
-            System.out.println("Log4j config loaded from: " +
-                    Thread.currentThread().getContextClassLoader()
-                            .getResource("log4j2.xml"));
             RestAssuredConfig config = RestAssuredConfig.config()
                     .httpClient(HttpClientConfig.httpClientConfig()
                             .setParam("http.connection.timeout", timeout)
                             .setParam("http.socket.timeout", timeout)
                             .setParam("http.connection-manager.timeout", timeout)
                     );
-            requestSpec = new RequestSpecBuilder()
-                    .setBaseUri(ConfigReader.get("base.url"))
+            RequestSpecification requestSpec = new RequestSpecBuilder()
+                    .setBaseUri(ConfigManager.getBaseUrl(serviceType))
                     .setContentType(ContentType.JSON)
-                    .addHeader("x-api-key", ConfigReader.get("api.key"))
+                    .addHeader("x-api-key", ConfigManager.getApiKey())
                     .setConfig(config)
                     .addFilter(new CustomLoggingFilter())
                     .build();
+            requestSpecs.put(serviceType, requestSpec);
 
             log.info("RequestSpecification initialized successfully");
 
@@ -46,11 +47,12 @@ public class BaseRequest {
         }
     }
 
-    public static synchronized RequestSpecification getRequestSpec() {
-        if (requestSpec == null) {
-            initRequestSpec();
+    public static synchronized RequestSpecification getRequestSpec(ServiceType serviceType) {
+        if (!requestSpecs.containsKey(serviceType)) {
+            initRequestSpec(serviceType);
         }
-        return requestSpec;
+
+        return requestSpecs.get(serviceType);
     }
 
 }

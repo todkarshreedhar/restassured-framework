@@ -1,7 +1,5 @@
 package config;
 
-
-import io.restassured.RestAssured;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,11 +23,13 @@ public class ConfigReader {
                 throw new RuntimeException("CRITICAL: config.properties not found in src/main/resources");
             }
             properties.load(is);
-            System.out.println("Loaded environment: "+ env);
+
             log.info("======================================");
             log.info("Loaded environment: {}", env);
             log.info("Loaded config file: {}", fileName);
-            log.info("Base URL: {}", properties.getProperty("base.url"));
+            log.info("User Base URL: {}", properties.getProperty("user.base.url"));
+            log.info("Auth Base URL: {}", properties.getProperty("auth.base.url"));
+            log.info("Payment Base URL: {}", properties.getProperty("payment.base.url"));
             log.info("======================================");
 
 
@@ -40,7 +40,7 @@ public class ConfigReader {
     }
     public static String get(String key) {
         String value = properties.getProperty(key);
-        if(value == null) System.err.println("WARNING: Key [" + key + "] returned null!");
+        if(value == null) log.warn("WARNING: Key [" + key + "] returned null!");
         return value;
     }
 }

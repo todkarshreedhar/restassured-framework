@@ -1,24 +1,27 @@
-2026-05-06 09:47:11 [main] INFO  ======================================
-2026-05-06 09:47:11 [main] INFO  Loaded environment: prod
-2026-05-06 09:47:11 [main] INFO  Loaded config file: config-prod.properties
-2026-05-06 09:47:11 [main] INFO  Base URL: https://reqres.in
-2026-05-06 09:47:11 [main] INFO  ======================================
-2026-05-06 09:47:11 [main] INFO  RequestSpecification initialized successfully
-2026-05-06 09:47:12 [main] INFO  ? FILTER EXECUTED ?
-2026-05-06 09:47:12 [main] INFO  ========== API REQUEST ==========
-2026-05-06 09:47:12 [main] INFO  Method: POST
-2026-05-06 09:47:12 [main] INFO  URI: https://reqres.in/api/users
-2026-05-06 09:47:12 [main] INFO  x-api-key: fr****dl
-2026-05-06 09:47:12 [main] INFO  Accept: */*
-2026-05-06 09:47:12 [main] INFO  Content-Type: application/json
-2026-05-06 09:47:12 [main] INFO  Request Body: {"name":"Shreedhar","job":"Automation Engineer"}
-2026-05-06 09:47:12 [main] INFO  ========== API RESPONSE ==========
-2026-05-06 09:47:12 [main] INFO  Status Code: 201
-2026-05-06 09:47:12 [main] INFO  Response Body: {
-    "name": "Shreedhar",
-    "job": "Automation Engineer",
-    "id": "310",
-    "createdAt": "2026-05-06T04:17:14.127Z",
+2026-05-06 14:42:41 [main] INFO  Generated random user: null
+2026-05-06 14:42:41 [main] INFO  ======================================
+2026-05-06 14:42:41 [main] INFO  Loaded environment: dev
+2026-05-06 14:42:41 [main] INFO  Loaded config file: config-dev.properties
+2026-05-06 14:42:41 [main] INFO  User Base URL: https://reqres.in
+2026-05-06 14:42:41 [main] INFO  Auth Base URL: https://dummyjson.com
+2026-05-06 14:42:41 [main] INFO  Payment Base URL: https://postman-echo.com
+2026-05-06 14:42:41 [main] INFO  ======================================
+2026-05-06 14:42:41 [main] INFO  RequestSpecification initialized successfully
+2026-05-06 14:42:41 [main] INFO  ? FILTER EXECUTED ?
+2026-05-06 14:42:41 [main] INFO  ========== API REQUEST ==========
+2026-05-06 14:42:41 [main] INFO  Method: POST
+2026-05-06 14:42:41 [main] INFO  URI: https://reqres.in/api/users
+2026-05-06 14:42:41 [main] INFO  x-api-key: fr****dl
+2026-05-06 14:42:41 [main] INFO  Accept: */*
+2026-05-06 14:42:41 [main] INFO  Content-Type: application/json
+2026-05-06 14:42:41 [main] INFO  Request Body: {"name":"User_5fe88ea3","job":"AutomationEngineer_5fe88ea3"}
+2026-05-06 14:42:42 [main] INFO  ========== API RESPONSE ==========
+2026-05-06 14:42:42 [main] INFO  Status Code: 201
+2026-05-06 14:42:42 [main] INFO  Response Body: {
+    "name": "User_5fe88ea3",
+    "job": "AutomationEngineer_5fe88ea3",
+    "id": "191",
+    "createdAt": "2026-05-06T09:12:43.919Z",
     "_meta": {
         "powered_by": "ReqRes",
         "docs_url": "https://app.reqres.in/documentation",
@@ -33,26 +36,26 @@
         "context": "legacy_success"
     }
 }
-2026-05-06 09:47:13 [main] INFO  ? FILTER EXECUTED ?
-2026-05-06 09:47:13 [main] INFO  ========== API REQUEST ==========
-2026-05-06 09:47:13 [main] INFO  Method: DELETE
-2026-05-06 09:47:13 [main] INFO  URI: https://reqres.in/api/users/2
-2026-05-06 09:47:13 [main] INFO  x-api-key: fr****dl
-2026-05-06 09:47:13 [main] INFO  Accept: */*
-2026-05-06 09:47:13 [main] INFO  Content-Type: application/json
-2026-05-06 09:47:13 [main] INFO  ========== API RESPONSE ==========
-2026-05-06 09:47:13 [main] INFO  Status Code: 204
-2026-05-06 09:47:13 [main] INFO  Response Body: 
-2026-05-06 09:47:13 [main] INFO  ? FILTER EXECUTED ?
-2026-05-06 09:47:13 [main] INFO  ========== API REQUEST ==========
-2026-05-06 09:47:13 [main] INFO  Method: GET
-2026-05-06 09:47:13 [main] INFO  URI: https://reqres.in/api/users
-2026-05-06 09:47:13 [main] INFO  x-api-key: fr****dl
-2026-05-06 09:47:13 [main] INFO  Accept: */*
-2026-05-06 09:47:13 [main] INFO  Content-Type: application/json
-2026-05-06 09:47:13 [main] INFO  ========== API RESPONSE ==========
-2026-05-06 09:47:13 [main] INFO  Status Code: 200
-2026-05-06 09:47:13 [main] INFO  Response Body: {
+2026-05-06 14:42:42 [main] INFO  ? FILTER EXECUTED ?
+2026-05-06 14:42:42 [main] INFO  ========== API REQUEST ==========
+2026-05-06 14:42:42 [main] INFO  Method: DELETE
+2026-05-06 14:42:42 [main] INFO  URI: https://reqres.in/api/users/2
+2026-05-06 14:42:42 [main] INFO  x-api-key: fr****dl
+2026-05-06 14:42:42 [main] INFO  Accept: */*
+2026-05-06 14:42:42 [main] INFO  Content-Type: application/json
+2026-05-06 14:42:43 [main] INFO  ========== API RESPONSE ==========
+2026-05-06 14:42:43 [main] INFO  Status Code: 204
+2026-05-06 14:42:43 [main] INFO  Response Body: 
+2026-05-06 14:42:43 [main] INFO  ? FILTER EXECUTED ?
+2026-05-06 14:42:43 [main] INFO  ========== API REQUEST ==========
+2026-05-06 14:42:43 [main] INFO  Method: GET
+2026-05-06 14:42:43 [main] INFO  URI: https://reqres.in/api/users
+2026-05-06 14:42:43 [main] INFO  x-api-key: fr****dl
+2026-05-06 14:42:43 [main] INFO  Accept: */*
+2026-05-06 14:42:43 [main] INFO  Content-Type: application/json
+2026-05-06 14:42:43 [main] INFO  ========== API RESPONSE ==========
+2026-05-06 14:42:43 [main] INFO  Status Code: 200
+2026-05-06 14:42:43 [main] INFO  Response Body: {
     "page": 1,
     "per_page": 6,
     "total": 12,
@@ -119,16 +122,16 @@
         "context": "legacy_success"
     }
 }
-2026-05-06 09:47:14 [main] INFO  ? FILTER EXECUTED ?
-2026-05-06 09:47:14 [main] INFO  ========== API REQUEST ==========
-2026-05-06 09:47:14 [main] INFO  Method: GET
-2026-05-06 09:47:14 [main] INFO  URI: https://reqres.in/api/users/3
-2026-05-06 09:47:14 [main] INFO  x-api-key: fr****dl
-2026-05-06 09:47:14 [main] INFO  Accept: */*
-2026-05-06 09:47:14 [main] INFO  Content-Type: application/json
-2026-05-06 09:47:14 [main] INFO  ========== API RESPONSE ==========
-2026-05-06 09:47:14 [main] INFO  Status Code: 200
-2026-05-06 09:47:14 [main] INFO  Response Body: {
+2026-05-06 14:42:44 [main] INFO  ? FILTER EXECUTED ?
+2026-05-06 14:42:44 [main] INFO  ========== API REQUEST ==========
+2026-05-06 14:42:44 [main] INFO  Method: GET
+2026-05-06 14:42:44 [main] INFO  URI: https://reqres.in/api/users/3
+2026-05-06 14:42:44 [main] INFO  x-api-key: fr****dl
+2026-05-06 14:42:44 [main] INFO  Accept: */*
+2026-05-06 14:42:44 [main] INFO  Content-Type: application/json
+2026-05-06 14:42:44 [main] INFO  ========== API RESPONSE ==========
+2026-05-06 14:42:44 [main] INFO  Status Code: 200
+2026-05-06 14:42:44 [main] INFO  Response Body: {
     "data": {
         "id": 3,
         "email": "emma.wong@reqres.in",
@@ -154,19 +157,21 @@
         "context": "legacy_success"
     }
 }
-2026-05-06 09:47:14 [main] INFO  ? FILTER EXECUTED ?
-2026-05-06 09:47:14 [main] INFO  ========== API REQUEST ==========
-2026-05-06 09:47:14 [main] INFO  Method: PUT
-2026-05-06 09:47:14 [main] INFO  URI: https://reqres.in/api/users/2
-2026-05-06 09:47:14 [main] INFO  x-api-key: fr****dl
-2026-05-06 09:47:14 [main] INFO  Accept: */*
-2026-05-06 09:47:14 [main] INFO  Content-Type: application/json
-2026-05-06 09:47:14 [main] INFO  Request Body: {"name":"UpdatedName"}
-2026-05-06 09:47:15 [main] INFO  ========== API RESPONSE ==========
-2026-05-06 09:47:15 [main] INFO  Status Code: 200
-2026-05-06 09:47:15 [main] INFO  Response Body: {
+2026-05-06 14:42:44 [main] INFO  Loaded test data file: testdata/users/updateUser.json
+2026-05-06 14:42:44 [main] INFO  ? FILTER EXECUTED ?
+2026-05-06 14:42:44 [main] INFO  ========== API REQUEST ==========
+2026-05-06 14:42:44 [main] INFO  Method: PUT
+2026-05-06 14:42:44 [main] INFO  URI: https://reqres.in/api/users/2
+2026-05-06 14:42:44 [main] INFO  x-api-key: fr****dl
+2026-05-06 14:42:44 [main] INFO  Accept: */*
+2026-05-06 14:42:44 [main] INFO  Content-Type: application/json
+2026-05-06 14:42:44 [main] INFO  Request Body: {"name":"UpdatedName","job":"Lead Engineer"}
+2026-05-06 14:42:44 [main] INFO  ========== API RESPONSE ==========
+2026-05-06 14:42:44 [main] INFO  Status Code: 200
+2026-05-06 14:42:44 [main] INFO  Response Body: {
     "name": "UpdatedName",
-    "updatedAt": "2026-05-06T04:17:16.247Z",
+    "job": "Lead Engineer",
+    "updatedAt": "2026-05-06T09:12:45.771Z",
     "_meta": {
         "powered_by": "ReqRes",
         "docs_url": "https://app.reqres.in/documentation",
@@ -181,19 +186,20 @@
         "context": "legacy_success"
     }
 }
-2026-05-06 09:47:15 [main] INFO  ? FILTER EXECUTED ?
-2026-05-06 09:47:15 [main] INFO  ========== API REQUEST ==========
-2026-05-06 09:47:15 [main] INFO  Method: PATCH
-2026-05-06 09:47:15 [main] INFO  URI: https://reqres.in/api/users/3
-2026-05-06 09:47:15 [main] INFO  x-api-key: fr****dl
-2026-05-06 09:47:15 [main] INFO  Accept: */*
-2026-05-06 09:47:15 [main] INFO  Content-Type: application/json
-2026-05-06 09:47:15 [main] INFO  Request Body: {"job":"Lead Engineer"}
-2026-05-06 09:47:15 [main] INFO  ========== API RESPONSE ==========
-2026-05-06 09:47:15 [main] INFO  Status Code: 200
-2026-05-06 09:47:15 [main] INFO  Response Body: {
+2026-05-06 14:42:44 [main] INFO  Loaded test data file: testdata/users/partialUpdateUser.json
+2026-05-06 14:42:44 [main] INFO  ? FILTER EXECUTED ?
+2026-05-06 14:42:44 [main] INFO  ========== API REQUEST ==========
+2026-05-06 14:42:44 [main] INFO  Method: PATCH
+2026-05-06 14:42:44 [main] INFO  URI: https://reqres.in/api/users/3
+2026-05-06 14:42:44 [main] INFO  x-api-key: fr****dl
+2026-05-06 14:42:44 [main] INFO  Accept: */*
+2026-05-06 14:42:44 [main] INFO  Content-Type: application/json
+2026-05-06 14:42:44 [main] INFO  Request Body: {"job":"Lead Engineer"}
+2026-05-06 14:42:45 [main] INFO  ========== API RESPONSE ==========
+2026-05-06 14:42:45 [main] INFO  Status Code: 200
+2026-05-06 14:42:45 [main] INFO  Response Body: {
     "job": "Lead Engineer",
-    "updatedAt": "2026-05-06T04:17:16.613Z",
+    "updatedAt": "2026-05-06T09:12:46.153Z",
     "_meta": {
         "powered_by": "ReqRes",
         "docs_url": "https://app.reqres.in/documentation",

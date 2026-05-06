@@ -5,6 +5,7 @@ import constants.Endpoints;
 import io.restassured.response.Response;
 import models.request.UserRequest;
 import models.response.UserResponse;
+import constants.ServiceType;
 import models.response.UsersListResponse;
 import models.response.SingleUserResponse;
 
@@ -14,7 +15,9 @@ public class UserService {
 
     // 🔹 CREATE
     public static Response createUserRaw(UserRequest request) {
-        return APIClient.post(Endpoints.createUser(), request);
+        return APIClient.post(ServiceType.USER,
+                Endpoints.createUser(),
+                request);
     }
 
     public static UserResponse createUser(UserRequest request) {
@@ -23,7 +26,8 @@ public class UserService {
 
     // 🔹 GET ALL USERS
     public static Response getAllUsersRaw() {
-        return APIClient.get(Endpoints.getUsers());
+        return APIClient.get(ServiceType.USER,
+                Endpoints.getUsers());
     }
 
     public static List<UserResponse> getAllUsers() {
@@ -34,7 +38,7 @@ public class UserService {
 
     // 🔹 GET SINGLE USER
     public static Response getUserRaw(int id) {
-        return APIClient.get(Endpoints.getUserById(id));
+        return APIClient.get(ServiceType.USER,Endpoints.getUserById(id));
     }
 
     public static UserResponse getUser(int id) {
@@ -45,7 +49,9 @@ public class UserService {
 
     // 🔹 UPDATE (PUT)
     public static Response updateUserRaw(int id, UserRequest request) {
-        return APIClient.put(Endpoints.updateUser(id) , request);
+        return APIClient.put(ServiceType.USER,
+                Endpoints.updateUser(id),
+                request);
     }
 
     public static UserResponse updateUser(int id, UserRequest request) {
@@ -54,7 +60,9 @@ public class UserService {
 
     // 🔹 UPDATE PARTIAL (PATCH)
     public static Response updatePartialUserRaw(int id, UserRequest request) {
-        return APIClient.patch(Endpoints.updatePartialUser(id), request);
+        return APIClient.patch(ServiceType.USER,
+                Endpoints.updatePartialUser(id),
+                request);
     }
 
     public static UserResponse updatePartialUser(int id, UserRequest request) {
@@ -63,7 +71,8 @@ public class UserService {
 
     // 🔹 DELETE
     public static Response deleteUserRaw(int id) {
-        return APIClient.delete(Endpoints.deleteUser(id));
+        return APIClient.delete(ServiceType.USER,
+                Endpoints.deleteUser(id));
     }
 
     public static boolean deleteUser(int id) {

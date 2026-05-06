@@ -4,11 +4,12 @@ import static org.hamcrest.Matchers.*;
 import io.restassured.response.Response;
 import models.request.UserRequest;
 import models.response.UserResponse;
-import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 import services.UserService;
 import utils.AssertUtils;
+import utils.TestDataLoader;
+import utils.UserFactory;
 
 public class SampleTest {
 
@@ -36,27 +37,50 @@ public class SampleTest {
 
     }
     @Test
-    public void createUserTest()
-    {
+    public void createUserTest() {
+
         // Arrange
-        UserRequest request = new UserRequest("Shreedhar", "Automation Engineer");
+        UserRequest request =
+                UserFactory.createRandomUser();
+
         // Act
-        Response response = UserService.createUserRaw(request);
-        UserResponse responseBody = response.as(UserResponse.class);
-        // Attach response (for FailureLogger)
-        Reporter.getCurrentTestResult().setAttribute("response", response);
+        Response response =
+                UserService.createUserRaw(request);
+
+        Reporter.getCurrentTestResult()
+                .setAttribute("response", response);
+
+        UserResponse responseBody =
+                response.as(UserResponse.class);
 
         // Assert
-        AssertUtils.assertEquals(responseBody.getName(), "Shreedhar", "Name mismatch");
-        AssertUtils.assertEquals(responseBody.getJob(), "Automation Engineer", "Job value mismatch");
-        AssertUtils.assertNotNull(responseBody.getId(), "ID should not be null");
+        AssertUtils.assertStatusCode(
+                response.getStatusCode(),
+                201
+        );
+
+        AssertUtils.assertEquals(
+                responseBody.getName(),
+                request.getName(),
+                "Name mismatch"
+        );
+
+        AssertUtils.assertEquals(
+                responseBody.getJob(),
+                request.getJob(),
+                "Job mismatch"
+        );
+
+        AssertUtils.assertNotNull(
+                responseBody.getId(),
+                "ID should not be null"
+        );
     }
 
     @Test
     public void updatePartialUserTest() {
 
-        UserRequest request = new UserRequest();
-        request.setJob("Lead Engineer");// Only partial update
+        UserRequest request = TestDataLoader.load("testdata/users/partialUpdateUser.json", UserRequest.class);
         Response response = UserService.updatePartialUserRaw(3, request);
         UserResponse responseBody = response.as(UserResponse.class);
         Reporter.getCurrentTestResult().setAttribute("response", response);
@@ -66,8 +90,7 @@ public class SampleTest {
     @Test
     public void updateCompleteUserTest() {
 
-        UserRequest request = new UserRequest();
-        request.setName("UpdatedName");
+        UserRequest request = TestDataLoader.load("testdata/users/updateUser.json", UserRequest.class);
         Response response= UserService.updateUserRaw(2, request);
         UserResponse responseBody = response.as(UserResponse.class);
         Reporter.getCurrentTestResult().setAttribute("response", response);
